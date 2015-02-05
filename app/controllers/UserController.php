@@ -32,7 +32,22 @@ class UserController extends \BaseController {
 	 */
 	public function store()
 	{
-		return Input::all();
+
+		$user = User::where('facebook_id', Input::get('facebook_id'))->first();
+
+		if (is_null($user)) {
+			$user = new User;
+			$user->first_name = Input::get('first_name');
+			$user->last_name = Input::get('last_name');
+			$user->facebook_id = Input::get('facebook_id');
+			$user->gender = Input::get('gender');
+			$user->email = Input::get('email');
+			$user->age = 0;
+
+			$user->save();
+		}
+
+		return $user;
 	}
 
 	/**
