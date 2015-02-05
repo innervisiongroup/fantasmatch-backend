@@ -45,9 +45,10 @@ class UserController extends \BaseController {
 			$user->age = 0;
 
 			$user->save();
+			return $user;
 		}
 
-		return $user;
+		else return $user->id;
 	}
 
 	/**
